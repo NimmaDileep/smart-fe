@@ -1,0 +1,25 @@
+.signin-container {
+    max-width: 100%;
+    display: flex;
+    position: relative;
+    margin: auto;
+}
+
+.loader-container-signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 100px;
+    left: 0;
+    z-index: 10;
+}
+
+.disabled-form {
+    opacity: 0.5;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+}

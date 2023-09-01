@@ -1,0 +1,33 @@
+
+
+.signin-page {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.signin-page h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-username-row,
+.input-password-row {
+    margin-bottom: 15px;
+}
+
+.signin-page button {
+    margin-top: 10px;
+}
+
+/* For smaller screens */
+@media (max-width: 576px) {
+    .signin-page {
+        width: 100%;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,5 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* if you want them vertically aligned to the middle */
+}

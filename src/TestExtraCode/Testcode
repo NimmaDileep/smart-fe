@@ -1,0 +1,234 @@
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import './UserLogin.css';
+//
+// const UserLogin = ({ onLogin }) => {
+//     const [user, setUser] = useState({
+//         username: "",
+//         password: ""
+//     });
+//
+//     const [error, setError] = useState('');
+//     const [success, setSuccess] = useState('');
+//
+//     const handleChange = e => {
+//         const { name, value } = e.target;
+//         setUser({...user, [name]: value});
+//     };
+//
+//     const validateForm = () => {
+//         if (user.username.trim() === "" || user.password.trim() === "") {
+//             setError("Username and password cannot be empty.");
+//             return false;
+//         }
+//
+//         // if(user.username.length < 8){
+//         //     setError("Username should be at least 8 characters long");
+//         //     return false
+//         // }
+//
+//         // if(user.password.length < 8){
+//         //     setError("Password too short");
+//         //     return false
+//         // }
+//
+//         setError("");
+//         return true;
+//     }
+//
+//     const login = async () => {
+//         if (!validateForm()) return;
+//
+//         const params = new URLSearchParams();
+//         params.append('username', user.username);
+//         params.append('password', user.password);
+//         params.append('grant_type', 'password');
+//
+//         const config = {
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             }
+//         }
+//
+//         try {
+//             const response = await axios.post('https://localhost:44316/token', params, config);
+//             onLogin(response.data.access_token);
+//         } catch (error) {
+//             setError("Invalid username or password.");
+//         }
+//     };
+//
+//     const register = () => {
+//         if (!validateForm()) return;
+//         // axios.post("http://localhost:5001/register", user)
+//         //     .then(res => {
+//         //         console.log("User successfully created")
+//         //         setSuccess("Registration successful proceed and login with credentials");
+//         //     })
+//         //     .catch(err => {
+//         //         setError("Something went wrong. Please try again.");
+//         //     });
+//     };
+//
+//     return (
+//         <div className="form-wrapper">
+//             <h2>Login</h2>
+//             {error && <div className="error-message">{error}</div>}
+//             {success && <div className="success-message">{success}</div>}
+//             <input type="text" name="username" value={user.username} onChange={handleChange} placeholder="Username"/>
+//             <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Password"/>
+//             <div className="button-container">
+//                 <button type="button" onClick={login}>Login</button>
+//                 <button type="button" onClick={register}>Register</button>
+//             </div>
+//         </div>
+//     );
+// };
+//
+// export default UserLogin;
+
+
+//
+// import React, {useState, useEffect} from 'react';
+// import axios from 'axios';
+// import Header from './Header';
+// import MainContent from './MainContent';
+//
+// const CRUD  = ({handleLogout, token}) => {
+//
+//     const [show, setShow] = useState(false);
+//     const [data, setData] = useState([]);
+//
+//     const [name, setName] = useState('');
+//     const [age, setAge] = useState('');
+//     const [country, setCountry] = useState('');
+//     const [position, setPosition] = useState('');
+//     const [wage, setWage] = useState('');
+//
+//     const [editId, setEditId] = useState(null);
+//     const [editName, setEditName] = useState('');
+//     const [editAge, setEditAge] = useState('');
+//     const [editCountry, setEditCountry] = useState('');
+//     const [editPosition, setEditPosition] = useState('');
+//     const [editWage, setEditWage] = useState('');
+//
+//     const getData = async () => {
+//         try {
+//             const response = await axios.get('https://localhost:44316/api/Employee', {
+//                 headers: {
+//                     Authorization: `Bearer ${token}`
+//                 }
+//             });
+//             if(response.data) {
+//                 setData(response.data);
+//             }
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     }
+//
+//     useEffect(() => {
+//         if(token) {
+//             getData();
+//         }
+//     }, [token]);
+//
+//     const handleClose = () => setShow(false);
+//     const handleShow = (id) => {
+//         const employee = data.find(employee => employee.Id === id);
+//         setEditId(id);
+//         setEditName(employee.Name);
+//         setEditAge(employee.Age);
+//         setEditCountry(employee.Country);
+//         setEditPosition(employee.Position);
+//         setEditWage(employee.Wage);
+//         setShow(true);
+//     };
+//
+//     const handleSubmit = async () => {
+//         try {
+//             await axios.post('http://localhost:5000/insert', {name, age, country, position, wage});
+//             setName('');
+//             setAge('');
+//             setCountry('');
+//             setPosition('');
+//             setWage('');
+//             getData();
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     };
+//
+//     const handleDelete = async (id) => {
+//         try {
+//             await axios.delete(`http://localhost:5000/delete/${id}`);
+//             getData();
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     };
+//
+//     const handleEdit = (id) => {
+//         handleShow(id);
+//     };
+//
+//     const handleUpdate = async () => {
+//         try {
+//             await axios.put(`http://localhost:5000/update/${editId}`, {
+//                 name: editName,
+//                 age: editAge,
+//                 country: editCountry,
+//                 position: editPosition,
+//                 wage: editWage
+//             });
+//             setEditId(null);
+//             setEditName('');
+//             setEditAge('');
+//             setEditCountry('');
+//             setEditPosition('');
+//             setEditWage('');
+//             setShow(false);
+//             getData();
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     };
+//
+//     return (
+//         <div>
+//             <Header handleLogout={handleLogout} />
+//             <MainContent
+//                 data={data}
+//                 name={name}
+//                 setName={setName}
+//                 age={age}
+//                 setAge={setAge}
+//                 country={country}
+//                 setCountry={setCountry}
+//                 position={position}
+//                 setPosition={setPosition}
+//                 wage={wage}
+//                 setWage={setWage}
+//                 show={show}
+//                 handleClose={handleClose}
+//                 handleShow={handleShow}
+//                 handleDelete={handleDelete}
+//                 handleEdit={handleEdit}
+//                 handleSubmit={handleSubmit}
+//                 editName={editName}
+//                 setEditName={setEditName}
+//                 editAge={editAge}
+//                 setEditAge={setEditAge}
+//                 editCountry={editCountry}
+//                 setEditCountry={setEditCountry}
+//                 editPosition={editPosition}
+//                 setEditPosition={setEditPosition}
+//                 editWage={editWage}
+//                 setEditWage={setEditWage}
+//                 handleUpdate={handleUpdate}
+//             />
+//         </div>
+//     )
+// }
+//
+// export default CRUD;

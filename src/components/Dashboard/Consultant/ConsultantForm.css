@@ -1,0 +1,98 @@
+.consultant-form-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+        margin: 30px auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.consultant-form-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.consultant-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus, .input-group select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.consultant-form-container button {
+    width: 25%;
+    margin: auto;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.consultant-form-container button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#status .status-submitted { background-color: #4CAF50; }
+#status .status-interviewed { background-color: #2196F3; }
+#status .status-rejected { background-color: #F44336; }
+#status .status-pending { background-color: #FFEB3B; }
+#status .status-vendor-call { background-color: #9E9E9E; }
+
+.row-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.row-container:last-child .input-group {
+    margin-right: 0;
+}
+
+.full-width {
+    flex: 100%;
+}
+
+@media (max-width: 768px) {
+    .input-group {
+        width: 100%;
+    }
+
+    .form-container form {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
